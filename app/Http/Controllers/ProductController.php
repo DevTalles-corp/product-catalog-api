@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ProductController extends Controller
 {
@@ -85,8 +86,11 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product): JsonResponse
     {
-        //
+        $product->delete();
+        return response()->json([
+            "message" => "Producto eliminado correctamente"
+        ]);
     }
 }
