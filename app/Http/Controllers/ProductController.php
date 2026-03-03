@@ -70,7 +70,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $validated = $request->validate([
+            "name" => ["sometimes", "string", "min:2"],
+            "price" => ["sometimes", "numeric", "min:0.01"],
+            "stock" => ["sometimes", "integer", "min:0"]
+        ]);
+        $product->update($validated);
+        return response()->json([
+            "message" => "Producto actualizado satisfactoriamente",
+            "data" => $product->refresh()
+        ]);
     }
 
     /**
