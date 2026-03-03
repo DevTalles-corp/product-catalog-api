@@ -12,7 +12,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::query()->orderByDesc("id")->get();
+        return response()->json(
+            [
+                "data" => $products
+            ]
+        );
     }
 
     /**
@@ -36,7 +41,11 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return response()->json(
+            [
+                "data" => $product
+            ]
+        );
     }
 
     /**
